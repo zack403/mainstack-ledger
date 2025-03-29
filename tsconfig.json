@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    // Target and Module Settings
+    "target": "ES2020",               // Modern JavaScript version supported by recent Node.js
+    "module": "commonjs",             // Node.js standard module system
+    "lib": ["ES2020"],                // Libraries for ES2020 features
+
+    "experimentalDecorators": true,                   /* Enable experimental support for legacy experimental decorators. */
+    "emitDecoratorMetadata": true,  
+
+    // Output Settings
+    "outDir": "./dist",               // Compiled JS goes here
+    "rootDir": "./src",               // Source TS files live here
+    "moduleResolution": "node10",                     /* Specify how TypeScript looks up a file from a given module specifier. */
+    "removeComments": true,           // Strip comments in production for smaller files
+
+    // Strictness (Type Safety)
+    "strict": true,                   // Enables all strict type-checking options
+    "noImplicitAny": true,            // Forces explicit types
+    "strictNullChecks": true,         // Prevents null/undefined bugs
+    "strictFunctionTypes": true,      // Ensures function type safety
+    "strictBindCallApply": true,      // Strictens bind/call/apply usage
+    "noImplicitThis": true,           // Prevents 'this' confusion
+    "alwaysStrict": true,             // Adds 'use strict' to output
+
+    // Error Prevention
+    "noUnusedLocals": true,           // Catches unused variables
+    "noUnusedParameters": true,       // Catches unused function params
+    "noImplicitReturns": true,        // Ensures all code paths return
+    "noFallthroughCasesInSwitch": true, // Prevents switch case fallthrough
+
+    // Interoperability
+    "esModuleInterop": true,          // Smooths CommonJS/ES Module interop
+    "allowSyntheticDefaultImports": true, // Allows default imports from CommonJS
+    "forceConsistentCasingInFileNames": true, // Prevents case-sensitivity issues
+
+    // Source Maps (Dev + Prod Debugging)
+    "sourceMap": true,                // Generates .map files for debugging
+    "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
+
+    // Performance
+    "incremental": true,              // Speeds up recompilation with .tsbuildinfo
+    "tsBuildInfoFile": "./dist/.tsbuildinfo" // Stores incremental build info
+  },
+  "include": ["src/**/*"],            // Compile everything in src/
+  "exclude": ["node_modules", "dist"] // Ignore these
+}
