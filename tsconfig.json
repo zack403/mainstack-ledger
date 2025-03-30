@@ -5,6 +5,8 @@
     "module": "commonjs",             // Node.js standard module system
     "lib": ["ES2020"],                // Libraries for ES2020 features
 
+    "typeRoots": ["./src/types", "./node_modules/@types"],
+
     "experimentalDecorators": true,                   /* Enable experimental support for legacy experimental decorators. */
     "emitDecoratorMetadata": true,  
 
