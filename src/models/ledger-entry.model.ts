@@ -13,8 +13,13 @@ interface ILedgerEntry extends Document {
 const LedgerEntrySchema = new Schema<ILedgerEntry>(
   {
     entryId: { type: String, required: true, unique: true, index: true },
-    transactionId: { type: String, required: true, index: true },
-    accountId: { type: String, required: true, index: true },
+    transactionId: {
+      type: String,
+      required: true,
+      index: true,
+      ref: 'Transaction',
+    },
+    accountId: { type: String, required: true, index: true, ref: 'Account' },
     amount: { type: String, required: true, match: /^-?\d+\.\d{2}$/ },
     entryType: { type: String, enum: Object.values(EntryType), required: true },
   },

@@ -25,7 +25,7 @@ const AuditTrailSchema = new Schema<IAuditTrail>(
       default: () => `aud-${uuidv4()}`,
     },
     entity: { type: String, required: true, index: true },
-    entityId: { type: String, required: true, index: true },
+    entityId: { type: String, required: true, index: true, ref: 'Account' },
     action: {
       type: String,
       enum: Object.values(AuditAction),

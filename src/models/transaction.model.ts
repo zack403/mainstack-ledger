@@ -30,8 +30,13 @@ const TransactionSchema = new Schema<ITransaction>(
       enum: Object.values(TransactionType),
       required: true,
     },
-    fromAccountId: { type: String, index: true, default: null },
-    toAccountId: { type: String, index: true, default: null },
+    fromAccountId: {
+      type: String,
+      index: true,
+      required: true,
+      ref: 'Account',
+    },
+    toAccountId: { type: String, index: true, required: true, ref: 'Account' },
     amount: { type: String, required: true, match: /^\d+\.\d{2}$/ },
     balanceBefore: {
       type: String,
