@@ -23,7 +23,7 @@ const AccountSchema = new Schema<IAccount>(
       unique: true,
       default: () => `acc-${uuidv4()}`,
     },
-    userId: { type: String, required: true, index: true, ref: 'User' },
+    userId: { type: String, required: true, ref: 'User' },
     accountNumber: { type: String, required: true, unique: true, index: true },
     accountName: { type: String, trim: true },
     accountType: {

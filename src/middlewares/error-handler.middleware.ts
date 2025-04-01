@@ -1,11 +1,12 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import logger from '../utils/logger.util';
 import { ResponseUtil } from '../utils/response.util';
 
 export class AppError extends Error {
   constructor(
     public status: number,
-    message: string
+    message: string,
+    public data?: { errors: Record<string, string> }
   ) {
     super(message);
     this.status = status;
@@ -14,13 +15,19 @@ export class AppError extends Error {
   }
 }
 
-export const errorHandler = (err: Error, req: Request, res: Response) => {
+export const errorHandler = (
+  err: Error,
+  req: Request,
+  res: Response,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _next: NextFunction
+) => {
   if (err instanceof AppError) {
     logger.warn(`AppError: ${err.status} - ${err.message}`, {
       path: req.path,
       method: req.method,
     });
-    ResponseUtil.error(res, err.status, err.message);
+    ResponseUtil.error(res, err.status, err.message, err.data);
   } else {
     logger.error('Unexpected error', {
       ...req.context,

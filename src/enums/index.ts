@@ -33,10 +33,3 @@ export enum EntryType {
   DEBIT = 'debit',
   CREDIT = 'credit',
 }
-
-export enum AuditAction {
-  CREATE = 'create',
-  READ = 'read',
-  UPDATE = 'update',
-  DELETE = 'delete',
-}

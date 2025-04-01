@@ -2,14 +2,14 @@ import mongoose, { Document, Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
 
-interface IUser extends Document {
+export interface IUser extends Document {
   userId: string;
   email: string;
   password: string;
   isVerified?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
-  comparePassword(candidatePassword: string): Promise<boolean>;
+  comparePassword(sentPassword: string): Promise<boolean>;
 }
 
 const userSchema = new Schema<IUser>(
@@ -43,9 +43,6 @@ const userSchema = new Schema<IUser>(
     toObject: { virtuals: true },
   }
 );
-
-userSchema.index({ userId: 1 });
-userSchema.index({ email: 1 });
 
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();

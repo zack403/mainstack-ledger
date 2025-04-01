@@ -60,7 +60,7 @@ const TransactionSchema = new Schema<ITransaction>(
       enum: Object.values(TransactionStatus),
       default: TransactionStatus.PENDING,
     },
-    requestId: { type: String, required: true, index: true },
+    requestId: { type: String, required: true },
     description: { type: String },
   },
   { timestamps: true }

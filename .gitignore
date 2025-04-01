@@ -3,3 +3,13 @@ dist/
 .env
 *.log
 .husky/_/
+src/config/keys/private.pem
+src/config/keys/public.pem
+dist/
+build/
+.vscode/
+.idea/
+*.swp
+.DS_Store
+npm-debug.log
+yarn-error.log

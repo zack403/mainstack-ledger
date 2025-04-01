@@ -1,12 +1,11 @@
 import { Schema, model, Document } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
-import { AuditAction } from '../enums';
 
 interface IAuditTrail extends Document {
   auditId: string;
   entity: string;
   entityId: string;
-  action: AuditAction;
+  action: string;
   performedBy: string;
   ipAddress: string;
   userAgent?: string;
@@ -28,14 +27,13 @@ const AuditTrailSchema = new Schema<IAuditTrail>(
     entityId: { type: String, required: true, index: true, ref: 'Account' },
     action: {
       type: String,
-      enum: Object.values(AuditAction),
       required: true,
     },
     performedBy: { type: String, required: true },
     ipAddress: { type: String, required: true },
     userAgent: { type: String },
     details: { type: Schema.Types.Mixed, default: {} },
-    requestId: { type: String, required: true, index: true },
+    requestId: { type: String, required: true },
     timestamp: { type: Date, default: Date.now },
   },
   { timestamps: true }
