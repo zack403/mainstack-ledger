@@ -5,6 +5,8 @@ declare module 'express' {
   interface Request {
     context?: {
       requestId: string;
+      userId?: string;
+      email?: string;
     };
   }
 }

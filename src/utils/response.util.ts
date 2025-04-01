@@ -24,11 +24,17 @@ export class ResponseUtil {
     } as ApiResponse<T>);
   }
 
-  static error(res: Response, status: number, message: string): Response {
+  static error(
+    res: Response,
+    status: number,
+    message: string,
+    data?: { errors: Record<string, string> }
+  ): Response {
     return res.status(status).json({
       status,
       success: false,
       message: message || 'An error occurred',
+      ...(data && { data }),
     } as ApiResponse<never>);
   }
 }

@@ -11,12 +11,14 @@ const env = cleanEnv(process.env, {
   }),
   PORT: port({ default: 5000, desc: 'Server port number' }),
   MONGO_URI: url({ desc: 'MongoDB connection string' }),
+  JWT_EXPIRES_IN: str({ default: '1h' }),
 });
 
 export const config = {
   nodeEnv: env.NODE_ENV,
   port: env.PORT,
   mongoUri: env.MONGO_URI,
+  jwtExpiresIn: env.JWT_EXPIRES_IN,
 } as const;
 
 logger.info('Environment variables validated successfully');
