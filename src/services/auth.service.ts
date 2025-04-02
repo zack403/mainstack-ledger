@@ -1,15 +1,19 @@
 import { injectable, inject } from 'tsyringe';
-import { TOKENS, IUserRepository } from '../types/auth.type';
+import { TOKENS } from '../types/app.types';
 import { LoginDtoType, RegisterDtoType } from '../dtos/auth.dto';
 import { AppError } from '../middlewares/error-handler.middleware';
 import logger from '../utils/logger.util';
 import { Request } from 'express';
 import { TokenUtil } from '../utils/token.util';
+import { IUserRepository } from '../types/auth.type';
+import { IAccountService } from '../types/account.type';
 
 @injectable()
 export class AuthService {
   constructor(
-    @inject(TOKENS.UserRepository) private readonly userRepo: IUserRepository
+    @inject(TOKENS.UserRepository) private readonly userRepo: IUserRepository,
+    @inject(TOKENS.AccountService)
+    private readonly accountService: IAccountService
   ) {}
 
   async register(req: Request, dto: RegisterDtoType) {
@@ -20,12 +24,18 @@ export class AuthService {
     const user = await this.userRepo.create({ email, password });
     const { userId } = user;
 
+    const account = await this.accountService.createAccount(userId);
+
+    const { accountId, accountNumber } = account;
+
     logger.info('User registered', {
       requestId: req.context?.requestId,
       email,
       userId,
+      accountId: account.accountId,
+      accountNumber: account.accountNumber,
     });
-    return { userId, email };
+    return { userId, email, accountId, accountNumber };
   }
 
   async login(req: Request, dto: LoginDtoType) {

@@ -2,7 +2,7 @@ import { Document, Schema, model } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 import { AccountStatus, AccountType, Currency } from '../enums';
 
-interface IAccount extends Document {
+export interface IAccount extends Document {
   accountId: string;
   userId: string;
   accountNumber: string;
@@ -55,6 +55,5 @@ const AccountSchema = new Schema<IAccount>(
 );
 
 AccountSchema.index({ userId: 1, currency: 1 });
-AccountSchema.index({ accountNumber: 1 });
 
 export const AccountModel = model<IAccount>('Account', AccountSchema);

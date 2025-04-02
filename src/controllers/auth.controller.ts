@@ -1,8 +1,9 @@
 import { injectable, inject } from 'tsyringe';
-import { TOKENS, IAuthService } from '../types/auth.type';
+import { TOKENS } from '../types/app.types';
 import { Request, Response } from 'express';
 import { LoginDto, RegisterDto } from '../dtos/auth.dto';
 import { ResponseUtil } from '../utils/response.util';
+import { IAuthService } from '../types/auth.type';
 
 @injectable()
 export class AuthController {
