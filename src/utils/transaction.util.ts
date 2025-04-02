@@ -33,7 +33,7 @@ export async function executeTransaction(
     balanceBefore: string;
     balanceAfter: string;
     requestId: string;
-    accountUpdates: { accountId: string; balance: string }[];
+    accountUpdates: { accountId: string; balance: string; version: number }[];
   }
 ) {
   const transaction = await transactionRepo.createTransaction(

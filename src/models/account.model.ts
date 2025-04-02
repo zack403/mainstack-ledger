@@ -13,6 +13,7 @@ export interface IAccount extends Document {
   accountName?: string;
   createdAt: Date;
   updatedAt: Date;
+  version?: number;
 }
 
 const AccountSchema = new Schema<IAccount>(
@@ -50,6 +51,7 @@ const AccountSchema = new Schema<IAccount>(
       required: true,
       default: AccountStatus.ACTIVE,
     },
+    version: { type: Number, required: true, default: 0 },
   },
   { timestamps: true }
 );
