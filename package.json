@@ -10,7 +10,8 @@
     "test": "jest",
     "format": "npm run format",
     "lint": "npm run lint",
-    "prepare": "if [ \"$NODE_ENV\" != \"production\" ]; then husky; fi"
+    "prepare": "node -e \"if (process.env.NODE_ENV === 'production') process.exit(1)\" || husky",
+    "postinstall": "npm run prepare"
   },
   "lint-staged": {
     "*.ts": [
@@ -43,7 +44,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
-    "@types/bcryptjs": "^3.0.0",
     "@types/express": "^5.0.1",
     "@types/jest": "^29.5.14",
     "@types/jsonwebtoken": "^9.0.9",
