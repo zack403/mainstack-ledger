@@ -12,6 +12,8 @@ import { ResponseUtil } from './utils/response.util';
 import router from './routes';
 import { auditInterceptor } from './middlewares/audit.middleware';
 import rateLimit from 'express-rate-limit';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './config/swagger';
 
 dotenv.config();
 
@@ -55,6 +57,8 @@ app.get('/health', (_req: Request, res: Response) => {
     data: { status: 'API is healthy' },
   });
 });
+
+app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/api/v1', router);
 
