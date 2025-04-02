@@ -1,7 +1,8 @@
 import { Schema, model, Document } from 'mongoose';
 import { EntryType } from '../enums';
+import { v4 as uuidv4 } from 'uuid';
 
-interface ILedgerEntry extends Document {
+export interface ILedgerEntry extends Document {
   entryId: string;
   transactionId: string;
   accountId: string;
@@ -12,7 +13,13 @@ interface ILedgerEntry extends Document {
 
 const LedgerEntrySchema = new Schema<ILedgerEntry>(
   {
-    entryId: { type: String, required: true, unique: true, index: true },
+    entryId: {
+      type: String,
+      required: true,
+      unique: true,
+      index: true,
+      default: () => `led-${uuidv4()}`,
+    },
     transactionId: {
       type: String,
       required: true,

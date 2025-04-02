@@ -11,7 +11,7 @@ const env = cleanEnv(process.env, {
   }),
   PORT: port({ default: 5000, desc: 'Server port number' }),
   MONGO_URI: url({ desc: 'MongoDB connection string' }),
-  JWT_EXPIRES_IN: str({ default: '1h' }),
+  JWT_EXPIRES_IN: str({ default: '5h' }),
 });
 
 export const config = {

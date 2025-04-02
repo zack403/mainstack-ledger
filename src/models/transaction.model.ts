@@ -2,7 +2,7 @@ import { Schema, model, Document } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 import { TransactionType, TransactionStatus, Currency } from '../enums';
 
-interface ITransaction extends Document {
+export interface ITransaction extends Document {
   transactionId: string;
   type: TransactionType;
   fromAccountId?: string | null;

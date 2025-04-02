@@ -6,6 +6,9 @@ import { TOKENS } from './types/app.types';
 import { AccountRepository } from './repositories/account.repository';
 import { AccountService } from './services/account.service';
 import { AccountController } from './controllers/account.controller';
+import { TransactionRepository } from './repositories/transaction.repository';
+import { TransactionService } from './services/transaction.service';
+import { TransactionController } from './controllers/transaction.controller';
 
 container.register(
   TOKENS.UserRepository,
@@ -35,6 +38,21 @@ container.register(
 container.register(
   TOKENS.AccountController,
   { useClass: AccountController },
+  { lifecycle: Lifecycle.Singleton }
+);
+container.register(
+  TOKENS.TransactionRepository,
+  { useClass: TransactionRepository },
+  { lifecycle: Lifecycle.Singleton }
+);
+container.register(
+  TOKENS.TransactionService,
+  { useClass: TransactionService },
+  { lifecycle: Lifecycle.Singleton }
+);
+container.register(
+  TOKENS.TransactionController,
+  { useClass: TransactionController },
   { lifecycle: Lifecycle.Singleton }
 );
 
