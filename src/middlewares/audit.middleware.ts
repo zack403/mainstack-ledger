@@ -23,6 +23,7 @@ export const auditInterceptor = (
           ]) ||
         req.body.entityId ||
         req.params.id ||
+        req.params.accountId ||
         userId;
       const pathSegments = req.originalUrl.split('/').filter(Boolean);
       const entity =

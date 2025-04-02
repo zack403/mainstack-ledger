@@ -44,6 +44,6 @@
     "incremental": true,              // Speeds up recompilation with .tsbuildinfo
     "tsBuildInfoFile": "./dist/.tsbuildinfo" // Stores incremental build info
   },
-  "include": ["src/**/*"],            // Compile everything in src/
+  "include": ["src/**/*", "tests"],            // Compile everything in src/
   "exclude": ["node_modules", "dist"] // Ignore these
 }
