@@ -10,7 +10,7 @@
     "test": "jest",
     "format": "npm run format",
     "lint": "npm run lint",
-    "prepare": "husky"
+    "prepare": "if [ \"$NODE_ENV\" != \"production\" ]; then husky; fi"
   },
   "lint-staged": {
     "*.ts": [
