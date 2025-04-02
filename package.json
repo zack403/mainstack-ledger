@@ -10,7 +10,7 @@
     "test": "jest",
     "format": "npm run format",
     "lint": "npm run lint",
-    "prepare": "node -e \"if (process.env.NODE_ENV === 'production') process.exit(1)\" || husky",
+    "prepare": "node -e \"if (process.env.NODE_ENV !== 'production') require('child_process').execSync('husky install', { stdio: 'inherit' })\"",
     "postinstall": "npm run prepare"
   },
   "lint-staged": {
