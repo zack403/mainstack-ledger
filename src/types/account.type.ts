@@ -11,7 +11,7 @@ export interface IAccountRepository {
   getByAccountId(accountId: string): Promise<IAccount | null>;
   update(
     accountId: string,
-    data: Partial<{ balance: string; currency: string }>,
+    data: Partial<{ balance: string; currency: string; version?: number }>,
     session?: mongoose.ClientSession
   ): Promise<IAccount | null>;
   create(data: {

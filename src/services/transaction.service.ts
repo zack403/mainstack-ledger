@@ -61,7 +61,11 @@ export class TransactionService implements ITransactionService {
           balanceAfter,
           requestId: idempotencyKey,
           accountUpdates: [
-            { accountId: account.accountId, balance: balanceAfter },
+            {
+              accountId: account.accountId,
+              balance: balanceAfter,
+              version: account.version as number,
+            },
           ],
         }
       );
@@ -115,7 +119,11 @@ export class TransactionService implements ITransactionService {
           balanceAfter,
           requestId: idempotencyKey,
           accountUpdates: [
-            { accountId: account.accountId, balance: balanceAfter },
+            {
+              accountId: account.accountId,
+              balance: balanceAfter,
+              version: account.version as number,
+            },
           ],
         }
       );
@@ -184,8 +192,16 @@ export class TransactionService implements ITransactionService {
           balanceAfter: fromBalanceAfter,
           requestId: idempotencyKey,
           accountUpdates: [
-            { accountId: fromAccount.accountId, balance: fromBalanceAfter },
-            { accountId: toAccount.accountId, balance: toBalanceAfter },
+            {
+              accountId: fromAccount.accountId,
+              balance: fromBalanceAfter,
+              version: fromAccount.version as number,
+            },
+            {
+              accountId: toAccount.accountId,
+              balance: toBalanceAfter,
+              version: toAccount.version as number,
+            },
           ],
         }
       );
