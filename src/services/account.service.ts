@@ -7,6 +7,7 @@ import { AppError } from '../middlewares/error-handler.middleware';
 import { TOKENS } from '../types/app.types';
 import { IAccountService } from '../types/account.type';
 import { IAccount } from '../models/account.model';
+import { extractRequestContext } from '../utils/request-context.util';
 
 @injectable()
 export class AccountService implements IAccountService {
@@ -14,6 +15,23 @@ export class AccountService implements IAccountService {
     @inject(TOKENS.AccountRepository)
     private readonly accountRepo: AccountRepository
   ) {}
+
+  async listAccountTransactions(
+    req: Request,
+    accountId: string,
+    filters: {
+      type?: string;
+      startDate?: Date;
+      endDate?: Date;
+      limit?: number;
+      offset?: number;
+    }
+  ) {
+    const { userId } = extractRequestContext(req);
+    const account = await this.accountRepo.findById(accountId, userId);
+    if (!account) throw new AppError(404, 'Account not found');
+    return await this.accountRepo.findByAccountId(accountId, userId, filters);
+  }
 
   async createAccount(userId: string) {
     const accountNumber = `AC${Date.now()}${Math.floor(Math.random() * 1000)}`;

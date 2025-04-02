@@ -24,6 +24,12 @@ router.get(
   asyncHandler(accountController.getAccount.bind(accountController))
 );
 
+router.get(
+  '/:accountId/transactions',
+  authenticate,
+  asyncHandler(accountController.getAccount.bind(accountController))
+);
+
 router.patch(
   '/:accountId',
   authenticate,
