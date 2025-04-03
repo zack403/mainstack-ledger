@@ -34,6 +34,20 @@ Solution Documentation
 
 # Improvements If given more time
 
+## Asynchronous Processing for Transactions
+
+- Currently, deposit, transfer, and withdrawal operations are handled synchronously.
+
+- I would implement BullMQ with Redis to queue these operations, ensuring:
+
+  - Better performance by offloading tasks to background workers.
+
+  - Fault tolerance, so failed transactions can be retried.
+
+  - Improved Rate limiting & load balancing, preventing overload on the database.
+
+- Each transaction would be queued and processed atomically to maintain integrity.
+
 ## caching
 Caching with Redis would be a great improvement to this application if given more time, it will greatly improve the performance of the application and increase the response time.
 
