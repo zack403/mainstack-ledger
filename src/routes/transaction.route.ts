@@ -3,7 +3,6 @@ import container from '../container';
 import { TOKENS } from '../types/app.types';
 import { TransactionController } from '../controllers/transaction.controller';
 import { asyncHandler } from '../middlewares/async-handler.middleware';
-import { authenticate } from '../middlewares/auth.middleware';
 import { validate } from '../middlewares/validate.middleware';
 import {
   DepositDto,
@@ -38,39 +37,33 @@ const transactionController = container.resolve<TransactionController>(
 router.post(
   '/deposit',
   depositRateLimiter,
-  authenticate,
   validate(DepositDto),
   asyncHandler(transactionController.deposit.bind(transactionController))
 );
 router.post(
   '/withdraw',
   withdrawalRateLimiter,
-  authenticate,
   validate(WithdrawalDto),
   asyncHandler(transactionController.withdraw.bind(transactionController))
 );
 router.post(
   '/transfer',
   transferRateLimiter,
-  authenticate,
   validate(TransferDto),
   asyncHandler(transactionController.transfer.bind(transactionController))
 );
 router.get(
   '/',
-  authenticate,
   asyncHandler(
     transactionController.listUserTransactions.bind(transactionController)
   )
 );
 router.get(
   '/:transactionId',
-  authenticate,
   asyncHandler(transactionController.getTransaction.bind(transactionController))
 );
 router.get(
   '/:transactionId/ledger-entries',
-  authenticate,
   asyncHandler(
     transactionController.getTransactionsLedger.bind(transactionController)
   )

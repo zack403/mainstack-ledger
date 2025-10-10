@@ -5,11 +5,11 @@ import { AppError } from '../middlewares/error-handler.middleware';
 import logger from '../utils/logger.util';
 import { Request } from 'express';
 import { TokenUtil } from '../utils/token.util';
-import { IUserRepository } from '../types/auth.type';
+import { IAuthService, IUserRepository } from '../types/auth.type';
 import { IAccountService } from '../types/account.type';
 
 @injectable()
-export class AuthService {
+export class AuthService implements IAuthService {
   constructor(
     @inject(TOKENS.UserRepository) private readonly userRepo: IUserRepository,
     @inject(TOKENS.AccountService)
@@ -42,6 +42,10 @@ export class AuthService {
     const { email, password } = dto;
     const user = await this.userRepo.findByEmailForLogin(email);
     if (!user || !(await user.comparePassword(password))) {
+      logger.warn('Invalid login attempt', {
+        requestId: req.context?.requestId,
+        email,
+      });
       throw new AppError(401, 'Invalid email or password');
     }
 

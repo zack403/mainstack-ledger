@@ -53,7 +53,7 @@ const AccountSchema = new Schema<IAccount>(
     },
     version: { type: Number, required: true, default: 0 },
   },
-  { timestamps: true }
+  { timestamps: true, versionKey: '_v', optimisticConcurrency: true }
 );
 
 AccountSchema.index({ userId: 1, currency: 1 });
